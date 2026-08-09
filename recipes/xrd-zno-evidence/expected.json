@@ -1,0 +1,6 @@
+{
+  "requiredCandidateIds": ["zno-wurtzite"],
+  "minimumMatchedPeaks": 3,
+  "requiredWarning": true,
+  "evidenceCoverage": 1.0
+}

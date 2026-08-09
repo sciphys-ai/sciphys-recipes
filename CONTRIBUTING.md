@@ -1,14 +1,7 @@
 # Contributing to SciPhys Recipes
 
-Good recipes are concrete and reproducible.
+A contribution can start as a `design` recipe, but only `executable` and higher recipes appear as runnable examples.
 
-Please include:
+Every executable recipe needs a `recipe.json`, licensed and hashed inputs or immutable references, runnable code, expected assertions, declared outputs, limitations, and validation instructions. Pin tool and contract versions. Keep raw data unchanged. Do not embed private lab information or rely on private hosted services for the core workflow.
 
-- a scientific question;
-- input assumptions;
-- runnable code or clear pseudocode;
-- expected output;
-- common failure modes;
-- structured expert feedback labels.
-
-Avoid private lab details unless the data has been approved for public release.
+Run `python scripts/validate.py`. Promotion to `reproduced` requires an independent reproduction record; promotion to `reviewed` requires named domain review with limitations retained.

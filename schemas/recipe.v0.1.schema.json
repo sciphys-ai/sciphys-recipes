@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.sciphys.org/recipe/v0.1.json",
+  "title": "SciPhys Recipe v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "id", "version", "title", "status", "techniques", "question", "inputs", "runtime", "command", "outputs", "validation", "license"],
+  "properties": {
+    "schemaVersion": { "const": "sciphys.recipe.v0.1" },
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$" },
+    "version": { "type": "string" },
+    "title": { "type": "string" },
+    "status": { "enum": ["design", "executable", "reproduced", "reviewed"] },
+    "techniques": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "question": { "type": "string" },
+    "inputs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["path", "sha256", "license"],
+        "properties": {
+          "path": { "type": "string" },
+          "sha256": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" },
+          "license": { "type": "string" },
+          "provenance": { "type": "string" },
+          "synthetic": { "type": "boolean" }
+        }
+      }
+    },
+    "runtime": { "type": "object" },
+    "command": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "outputs": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "validation": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "limitations": { "type": "array", "items": { "type": "string" } },
+    "license": { "type": "string" }
+  }
+}
