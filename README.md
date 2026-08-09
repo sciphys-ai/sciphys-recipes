@@ -29,8 +29,14 @@ Required outputs normally include normalized data, QC findings, analysis results
 Validate repository contracts:
 
 ```bash
+python -m pip install -r requirements-dev.txt
 python scripts/validate.py
 ```
+
+Maintainers can run the `Validate recipes` workflow manually with a SciPhys OS
+branch, tag, or commit. The integration job builds that exact runtime in a clean
+GitHub runner, executes the flagship recipe, and uploads the resulting evidence
+artifacts for inspection.
 
 ## Ecosystem
 
