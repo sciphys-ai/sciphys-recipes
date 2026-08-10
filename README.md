@@ -1,34 +1,47 @@
 # SciPhys Recipes
 
-Reproducible analysis recipes for experimental materials and physics.
+[![Validate recipes](https://github.com/sciphys-ai/sciphys-recipes/actions/workflows/validate.yml/badge.svg)](https://github.com/sciphys-ai/sciphys-recipes/actions/workflows/validate.yml)
 
-Recipes are practical, runnable workflows that show how to go from raw
-instrument data to scientific evidence. They are designed for students,
-researchers, and maintainers who want to understand the reasoning behind an
-analysis rather than only receive a final answer.
+Executable, evidence-producing workflows for experimental science.
 
-## Current Recipes
+A SciPhys recipe is more than a notebook or prompt. It pins inputs and tool versions, declares a command, produces machine-readable artifacts, and connects every scientific claim back to data through an Evidence Bundle.
 
-- `recipes/xrd-zno-phase-identification.md`: XRD parsing, peak evidence, and ZnO phase matching.
-- `recipes/battery-health-screening.md`: battery time-series context and health-state screening.
+## Recipe maturity
 
-## Recipe Standard
+- `design`: scientific workflow and failure modes are documented; not yet executable.
+- `executable`: runs locally from declared public inputs.
+- `reproduced`: an independent contributor reproduced the declared outputs.
+- `reviewed`: a domain expert reviewed the scientific interpretation and limitations.
 
-Each recipe should include:
+## Current recipes
 
-- scientific question;
-- input data format;
-- minimal code or pseudocode;
-- expected result;
-- common failure modes;
-- how expert feedback should be captured.
+| Recipe | Technique | Status | Output |
+|---|---|---|---|
+| [`xrd-zno-evidence`](recipes/xrd-zno-evidence/README.md) | XRD | executable | inspection, Evidence Bundle, validation report |
+| [`battery-health-screening.md`](recipes/battery-health-screening.md) | electrochemistry | design | proposed health evidence workflow |
 
-## Related Repositories
+## Recipe contract
 
-- [sciphys-os](https://github.com/sciphys-ai/sciphys-os)
-- [sciphys-formats](https://github.com/sciphys-ai/sciphys-formats)
-- [sciphys-bench](https://github.com/sciphys-ai/sciphys-bench)
+Each recipe directory contains `recipe.json`, redistributable input or immutable input references, a runnable entry point, expected assertions, and documentation. The manifest follows [`schemas/recipe.v0.1.schema.json`](schemas/recipe.v0.1.schema.json).
 
-## License
+Required outputs normally include normalized data, QC findings, analysis results, reproducible figure bundle where relevant, claim ledger, Evidence Bundle, and validation report. A recipe must surface missing capabilities and scientific limitations rather than silently skipping them.
 
-Apache-2.0.
+Validate repository contracts:
+
+```bash
+python -m pip install -r requirements-dev.txt
+python scripts/validate.py
+```
+
+Maintainers can run the `Validate recipes` workflow manually with a SciPhys OS
+branch, tag, or commit. The integration job builds that exact runtime in a clean
+GitHub runner, executes the flagship recipe, and uploads the resulting evidence
+artifacts for inspection.
+
+## Ecosystem
+
+- [sciphys-os](https://github.com/sciphys-ai/sciphys-os) provides runtime tools and Skills.
+- [sciphys-formats](https://github.com/sciphys-ai/sciphys-formats) defines portable measurement and evidence contracts.
+- [sciphys-bench](https://github.com/sciphys-ai/sciphys-bench) evaluates recipe correctness, reproducibility, and claim integrity.
+
+Code is Apache-2.0. Every recipe input must declare its own license and provenance.

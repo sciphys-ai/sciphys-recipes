@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "sciphys.recipe.v0.1",
+  "id": "xrd.zno-evidence",
+  "version": "0.1.0",
+  "title": "ZnO XRD peak list to auditable evidence",
+  "status": "executable",
+  "techniques": ["xrd"],
+  "question": "Are the supplied peak positions consistent with wurtzite ZnO, and what evidence and limitations support that interpretation?",
+  "inputs": [
+    {
+      "path": "input/zno.xy",
+      "sha256": "b318cb947a0fc8a07db64bb80e38462c7fdc2de713e55ed0d5ff97226d7830c1",
+      "license": "CC0-1.0",
+      "provenance": "Synthetic demonstration peak list maintained by SciPhys AI",
+      "synthetic": true
+    }
+  ],
+  "runtime": {
+    "python": ">=3.10",
+    "node": ">=20.9",
+    "sciphys-os": ">=0.2.0 <0.3.0"
+  },
+  "command": ["python", "run.py", "--sciphys-os", "/path/to/sciphys-os", "--output", "output"],
+  "outputs": ["output/inspection.json", "output/evidence-bundle.json", "output/validation.json"],
+  "validation": ["input hashes match", "candidate includes zno-wurtzite", "every claim references evidence", "Evidence Bundle validator passes"],
+  "limitations": ["Input is a synthetic sparse peak list, not a raw diffractogram", "Candidate agreement is not independent phase confirmation", "Expert review is required before publication"],
+  "license": "Apache-2.0"
+}
